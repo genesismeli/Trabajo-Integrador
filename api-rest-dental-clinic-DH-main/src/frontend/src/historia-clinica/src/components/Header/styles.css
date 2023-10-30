@@ -1,0 +1,12 @@
+/* Header.css */
+.header {
+  background-color: #1dbeb4;
+  color: #383b58;
+  text-align: center;
+  padding: 15px 0;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Asegura que el encabezado esté por encima del contenido */
+}

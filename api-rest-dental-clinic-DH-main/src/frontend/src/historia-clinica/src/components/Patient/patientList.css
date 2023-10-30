@@ -1,0 +1,86 @@
+:root {
+    --primary-color: #1DBEB4;
+    --color2: #545776;
+    --color4: #7F7F7F;
+ }
+
+ .patient-list-container {
+   width: 80%; /* Aumenta el ancho del formulario */
+   margin: 30px auto;
+   padding: 20px;
+   background-color: white;
+   border-radius: 10px;
+   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+   overflow-y: auto;
+   max-height: calc(100vh - 200px);
+  }
+
+
+
+ .create-patient-button {
+   background-color: var(--color2); /* Usa color4 para el fondo del botón */
+   color: white;
+   border: none;
+   padding: 10px 15px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 16px; /* Aumenta el tamaño del texto del botón */
+   border-radius: 5px;
+   cursor: pointer;
+   transition: background-color 0.3s;
+ }
+
+.patient-list-container {
+   width: 80%;
+   margin: 20px auto; /* Espacio en los bordes izquierdo y derecho */
+   padding: 20px; /* Espacio en la parte superior, inferior, izquierda y derecha */
+   overflow-y: auto;
+   max-height: calc(100vh - 200px);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: fixed;
+}
+
+th, td {
+  border: 1px solid #ddd;
+   padding: 8px;
+   text-align: center;
+}
+
+th {
+  background-color: var(--color2);
+  color: white;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--color2);
+}
+
+.create-patient-button:hover {
+  background-color: #7F7F7F;
+}
+
+.Modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 80px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  max-width: 80%; /* Establece el ancho máximo del modal */
+  overflow-y: auto; /* Agrega una barra de desplazamiento vertical si el contenido es demasiado largo */
+}
+
+
