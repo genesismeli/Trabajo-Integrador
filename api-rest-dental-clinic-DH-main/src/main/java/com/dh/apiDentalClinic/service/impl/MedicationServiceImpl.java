@@ -84,10 +84,8 @@ public class MedicationServiceImpl implements IMedicationService {
 
         MedicationDTO medicationDTO = new MedicationDTO();
         medicationDTO.setId(medication.getId());
-        medicationDTO.setMedicationName(medication.getMedicationName());
-        medicationDTO.setConcentration(medication.getConcentration());
-        medicationDTO.setPresentation(medication.getPresentation());
-        medicationDTO.setTradeName(medication.getTradeName());
+        medicationDTO.setVademecum(medication.getVademecum());
+
 
         return medicationDTO;
     }

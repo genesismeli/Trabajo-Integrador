@@ -19,25 +19,23 @@ import javax.persistence.*;
 public class Medication {
 
     @Id
+    @Column(name = "medication_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_medicacion")
+
     private Long id;
 
-    @Column(name = "medication_name") //nombre de la droga
-    private String medicationName;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vademecum_id")
+    @JsonIgnoreProperties("hibernateLazyInitializer")
+    private Vademecum vademecum;
 
-    @Column(name = "concentration")
-    private String concentration;
 
-    @Column(name = "presentation")
-    private String presentation;
-
-    @Column(name = "trade_name") // nombre comercial
-    private String tradeName;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "clinical_records_id")
     private ClinicalRecord clinicalRecord;
+
+    @Column(name= "notes")
+    private String notes;
 
 
 }

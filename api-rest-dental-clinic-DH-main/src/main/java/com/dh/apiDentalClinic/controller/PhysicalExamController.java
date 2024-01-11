@@ -49,10 +49,7 @@ public class PhysicalExamController {
         }
     }
 
-    @Operation(summary = "Add new physicalExam",
-            parameters = @Parameter(name = "Authorization", in = HEADER, description = "Json web token required", required = true),
-            security = @SecurityRequirement(name = "jwtAuth"))
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+    @Operation(summary = "Add new physicalExam")
     @PostMapping("/add")
     public ResponseEntity<ApiResponse<PhysicalExamDTO>> addPhysicalExam(@RequestBody PhysicalExamDTO physicalExamDTO) {
         physicalExamService.savePhysicalExam(physicalExamDTO);

@@ -1,10 +1,7 @@
 package com.dh.apiDentalClinic.service.impl;
 
 
-import com.dh.apiDentalClinic.DTO.ClinicalRecordDTO;
-import com.dh.apiDentalClinic.DTO.DiagnosisDTO;
-import com.dh.apiDentalClinic.DTO.MedicationDTO;
-import com.dh.apiDentalClinic.DTO.PhysicalExamDTO;
+import com.dh.apiDentalClinic.DTO.*;
 import com.dh.apiDentalClinic.entity.ClinicalRecord;
 import com.dh.apiDentalClinic.entity.Diagnosis;
 import com.dh.apiDentalClinic.entity.Medication;
@@ -15,6 +12,10 @@ import com.dh.apiDentalClinic.repository.IClinicalRecordRepository;
 import com.dh.apiDentalClinic.service.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -57,15 +58,9 @@ public class ClinicalRecordServiceImpl implements IClinicalRecordService {
     }
 
     @Override
-    public Collection<ClinicalRecordDTO> findAllClinicalRecord() {
-        List<ClinicalRecord> clinicalRecords = clinicalRecordRepository.findAll();
-        Set<ClinicalRecordDTO> clinicalRecordDTO = new HashSet<>();
-
-        for (ClinicalRecord clinicalRecord : clinicalRecords) {
-            clinicalRecordDTO.add(mapper.convertValue(clinicalRecord, ClinicalRecordDTO.class));
-        }
-        return clinicalRecordDTO;
-
+    public Collection<ClinicalRecordDTO> findAllClinicalRecord(Pageable pageable) {
+        Page<ClinicalRecord> clinicalRecords = clinicalRecordRepository.findAll(pageable);
+        return clinicalRecords.map(clinicalRecord -> mapper.convertValue(clinicalRecord, ClinicalRecordDTO.class)).getContent();
     }
 
     @Override
@@ -97,11 +92,20 @@ public class ClinicalRecordServiceImpl implements IClinicalRecordService {
     }
 
     @Override
-    public List<ClinicalRecordDTO> findClinicalRecordsByPatientId(Long patientId) {
-        Optional<ClinicalRecord> clinicalRecords = clinicalRecordRepository.findByPatientId(patientId);
-        return clinicalRecords.stream()
+    public PageDTO<ClinicalRecordDTO> findClinicalRecordsByPatientId(Long patientId, int page, int size, Sort sort) {
+        Page<ClinicalRecord> clinicalRecordsPage = clinicalRecordRepository.findByPatientId(patientId, PageRequest.of(page, size, sort));
+
+        List<ClinicalRecordDTO> clinicalRecordDTOs = clinicalRecordsPage.getContent().stream()
                 .map(clinicalRecord -> mapper.convertValue(clinicalRecord, ClinicalRecordDTO.class))
                 .collect(Collectors.toList());
+
+        return new PageDTO<>(
+                clinicalRecordDTOs,
+                clinicalRecordsPage.getTotalPages(),
+                clinicalRecordsPage.getTotalElements(),
+                clinicalRecordsPage.getNumber(),
+                clinicalRecordsPage.getSize()
+        );
     }
 
     @Override

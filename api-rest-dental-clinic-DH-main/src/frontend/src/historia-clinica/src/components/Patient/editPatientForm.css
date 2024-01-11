@@ -1,40 +1,38 @@
-:root {
-    --primary-color: #1DBEB4;
-    --color2: #545776;
-    --color4: #7F7F7F;
- }
+/* editPatientForm.css */
 
+:root {
+  --primary-color: #1DBEB4;
+  --color2: #545776;
+  --color4: #7F7F7F;
+
+}
 
 .edit-patient-form-container {
-   width: 400px; /* Ajusta el ancho del modal según tus necesidades */
-    margin: 80px auto; /* Centra el modal en la página */
-    padding: 10px; /* Ajusta el espacio interno del modal */
-    background-color: var(--color2); /* Usa el color de fondo deseado */
-    border-radius: 10px; /* Ajusta el radio de las esquinas del modal */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Añade una sombra al modal */
-    overflow-y: auto;
-    text-align: center;
+  width: 800px;
+  margin: 80px auto;
+  padding: 10px;
+  background-color: var(--color2);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 4.9);
+  overflow-y: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column; /* Cambiado a 'column' */
 }
 
-.edit-patient-form-container input[type="text"],
-.edit-patient-form-container input[type="email"],
-.edit-patient-form-container input[type="date"]
-{
-  width: calc(100% - 20px); /* Ajusta el ancho del campo de entrada */
-  padding: 10px; /* Ajusta el espacio interno del campo de entrada */
-  margin-bottom: 15px; /* Espaciado entre los campos de entrada */
-  font-size: 16px; /* Tamaño de la fuente del campo de entrada */
-  border: 1px solid var(--color4); /* Borde del campo de entrada */
-  border-radius: 9px; /* Radio de las esquinas del campo de entrada */
+.edit-patient-form-container .form-field {
+  width: 48%; /* Ajusta el ancho según sea necesario */
+    box-sizing: border-box;
+    display: inline-block; /* Permite que los form-row se muestren en línea uno al lado del otro */
+    vertical-align: top; /* Alinea la parte superior de los form-row */
+    margin-right: 2%;
 }
 
-#gender {
-   width: calc(100% - 20px); /* Ajusta el ancho del campo de entrada */
-   padding: 10px; /* Ajusta el espacio interno del campo de entrada */
-   margin-bottom: 15px; /* Espaciado entre los campos de entrada */
-   font-size: 16px; /* Tamaño de la fuente del campo de entrada */
-   border: 1px solid var(--color4); /* Borde del campo de entrada */
-   border-radius: 9px;
+.edit-patient-form-container label {
+  width: 30%;
+  margin-right: 20px; /* Agregado para espacio entre la etiqueta y el campo de entrada */
+  color: white;
+  font-size: 18px;
 }
 
 #sesion {
@@ -43,25 +41,40 @@
   color: white;
 }
 
-.edit-patient-form-container label {
-  display: block;
-  margin-bottom: 10px;
-  color: white; /* Color del texto de la etiqueta */
-  font-size: 18px; /* Tamaño de la fuente de la etiqueta */
-}
-
 .edit-patient-form-container button {
-  background-color: #7F7F7F; /* Color de fondo del botón */
-  color: white; /* Color del texto del botón */
+  background-color: #7F7F7F;
+  color: white;
   border: none;
-  padding: 12px 20px; /* Espaciado interno del botón */
-  font-size: 16px; /* Tamaño de la fuente del botón */
-  border-radius: 5px; /* Radio de las esquinas del botón */
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 5px;
   cursor: pointer;
   margin-right: 23px;
-  transition: background-color 0.3s; /* Transición al pasar el mouse sobre el botón */
+  transition: background-color 0.3s;
 }
 
 .edit-patient-form-container button:hover {
-  background-color: var(--primary-color); /* Cambia el color del botón al pasar el mouse */
+  background-color: var(--primary-color);
 }
+
+.edit-patient-form-container input[type="text"],
+.edit-patient-form-container input[type="email"],
+.edit-patient-form-container input[type="date"],
+.edit-patient-form-container input[type="number"],
+.edit-patient-form-container input[type="tel"],
+.edit-patient-form-container select {
+  width: 48%;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  border: 1px solid var(--color4);
+  border-radius: 9px;
+}
+
+.error-message {
+  color: white; /* Color para mensajes de error */
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+

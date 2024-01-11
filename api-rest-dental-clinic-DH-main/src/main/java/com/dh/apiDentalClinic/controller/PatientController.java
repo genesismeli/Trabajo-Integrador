@@ -1,9 +1,7 @@
 package com.dh.apiDentalClinic.controller;
 
-
-import com.dh.apiDentalClinic.DTO.ClinicalRecordDTO;
+import com.dh.apiDentalClinic.DTO.PageDTO;
 import com.dh.apiDentalClinic.DTO.PatientDTO;
-import com.dh.apiDentalClinic.entity.ClinicalRecord;
 import com.dh.apiDentalClinic.service.IClinicalRecordService;
 import com.dh.apiDentalClinic.service.IPatientService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
+import java.util.List;
 
 import static io.swagger.v3.oas.annotations.enums.ParameterIn.HEADER;
 
@@ -32,11 +30,15 @@ public class PatientController {
     @Autowired
     IClinicalRecordService iclinicalRecordService;
 
-
     @Operation(summary = "Find all patients")
     @GetMapping("/all")
-    public ResponseEntity<Collection<PatientDTO>> getAllPatients() {
-        return ResponseEntity.ok(ipatientService.findAllPatients());
+    public ResponseEntity<PageDTO<PatientDTO>> getAllPatients(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size) {
+
+        PageDTO<PatientDTO> patientsPage = ipatientService.findAllPatients(page, size);
+
+        return ResponseEntity.ok(patientsPage);
     }
 
 
@@ -115,6 +117,14 @@ public class PatientController {
         }
 
         return response;
+    }
+
+    @GetMapping("/search")
+    public List<PatientDTO> searchPatients(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String lastName,
+            @RequestParam(required = false) String dni) {
+        return ipatientService.searchPatients(name, lastName, dni);
     }
 
 }

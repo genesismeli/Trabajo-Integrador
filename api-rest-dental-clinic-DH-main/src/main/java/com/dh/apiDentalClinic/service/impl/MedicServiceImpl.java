@@ -1,6 +1,7 @@
 package com.dh.apiDentalClinic.service.impl;
 
 import com.dh.apiDentalClinic.DTO.MedicDTO;
+import com.dh.apiDentalClinic.DTO.PageDTO;
 import com.dh.apiDentalClinic.DTO.PatientDTO;
 import com.dh.apiDentalClinic.entity.Medic;
 import com.dh.apiDentalClinic.entity.Patient;
@@ -9,12 +10,15 @@ import com.dh.apiDentalClinic.repository.IMedicRepository;
 import com.dh.apiDentalClinic.service.IMedicService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class MedicServiceImpl implements IMedicService {
@@ -36,15 +40,20 @@ public class MedicServiceImpl implements IMedicService {
     }
 
     @Override
-    public Collection<MedicDTO> findAllMedic() {
-        List<Medic> medics = medicRepository.findAll();
-        Set<MedicDTO> medicDTO = new HashSet<>();
+    public PageDTO<MedicDTO> findAllMedics(int page, int size) {
+        Page<Medic> medicsPage = medicRepository.findAll(PageRequest.of(page, size));
 
-        for (Medic medic : medics) {
-            medicDTO.add(mapper.convertValue(medic, MedicDTO.class));
-        }
-        return medicDTO;
+        List<MedicDTO> medicDTOs = medicsPage.getContent().stream()
+                .map(patient -> mapper.convertValue(patient, MedicDTO.class))
+                .collect(Collectors.toList());
 
+        return new PageDTO<>(
+                medicDTOs,
+                medicsPage.getTotalPages(),
+                medicsPage.getTotalElements(),
+                medicsPage.getNumber(),
+                medicsPage.getSize()
+        );
     }
 
 
@@ -74,5 +83,32 @@ public class MedicServiceImpl implements IMedicService {
     @Override
     public void updateMedic(MedicDTO newMedicDTO) {
         saveMethod(newMedicDTO);
+    }
+
+    @Override
+    public List<MedicDTO> searchMedics(String name, String lastName, String registrationNumber) {
+        List<Medic> medics = medicRepository.findByNameContainingOrLastNameContainingOrRegistrationNumberContaining(name, lastName, registrationNumber);
+
+        // Mapear la lista de entidades Patient a una lista de DTOs PatientDTO
+        List<MedicDTO> medicDTOs = medics.stream()
+                .map(this::convertEntityToDto)
+                .collect(Collectors.toList());
+
+        return medicDTOs;
+    }
+
+    @Override
+    public MedicDTO convertEntityToDto(Medic medic) {
+        MedicDTO medicDTO = new MedicDTO();
+        medicDTO.setId(medic.getId());
+        medicDTO.setName(medic.getName());
+        medicDTO.setLastName(medic.getLastName());
+        medicDTO.setEmail(medic.getEmail());
+        medicDTO.setPassword(medic.getPassword());
+        medicDTO.setRegistrationNumber(medic.getRegistrationNumber());
+        medicDTO.setSpeciality(medic.getSpeciality());
+
+
+        return medicDTO;
     }
 }

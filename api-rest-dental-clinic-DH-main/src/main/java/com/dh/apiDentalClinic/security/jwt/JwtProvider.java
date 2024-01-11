@@ -33,7 +33,7 @@ public class JwtProvider {
 
     }
 
-    public boolean validateToken(String token) {
+    public boolean validateToken(String token) throws TokenExpiredException {
         try {
             Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
             return true;
@@ -43,6 +43,7 @@ public class JwtProvider {
             logger.error("Token not supported");
         } catch (ExpiredJwtException e) {
             logger.error("Token expiration");
+            throw new TokenExpiredException("El token ha expirado");
         } catch (IllegalArgumentException e) {
             logger.error("Empty token");
         } catch (SignatureException e) {

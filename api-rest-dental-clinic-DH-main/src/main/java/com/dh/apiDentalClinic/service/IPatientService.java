@@ -1,11 +1,13 @@
 package com.dh.apiDentalClinic.service;
 
+import com.dh.apiDentalClinic.DTO.PageDTO;
 import com.dh.apiDentalClinic.DTO.PatientDTO;
 import com.dh.apiDentalClinic.entity.ClinicalRecord;
 import com.dh.apiDentalClinic.entity.Patient;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -13,7 +15,7 @@ import java.util.Set;
 public interface IPatientService {
 
 
-    Collection<PatientDTO> findAllPatients();
+    PageDTO<PatientDTO> findAllPatients(int page, int size);
 
     PatientDTO findPatientById(Long id);
 
@@ -26,4 +28,7 @@ public interface IPatientService {
     PatientDTO convertEntityToDto(Patient patient);
 
     Patient findById(Long id);
+
+    List<PatientDTO> searchPatients(String name, String lastName, String dni);
+
 }

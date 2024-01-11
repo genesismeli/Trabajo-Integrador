@@ -4,6 +4,7 @@ import com.dh.apiDentalClinic.DTO.DiagnosisDTO;
 import com.dh.apiDentalClinic.entity.Diagnosis;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface IDiagnosisService {
     Collection<DiagnosisDTO> findAllDiagnosis();
@@ -17,6 +18,8 @@ public interface IDiagnosisService {
     void updateDiagnosis(DiagnosisDTO newDiagnosisDTO);
 
     DiagnosisDTO convertEntityToDto(Diagnosis diagnosis);
+
+    List<Diagnosis> findByCodeOrDescription(String code, String description);
 
 
 

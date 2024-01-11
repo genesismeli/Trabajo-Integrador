@@ -1,17 +1,20 @@
 package com.dh.apiDentalClinic.service;
 
 import com.dh.apiDentalClinic.DTO.ClinicalRecordDTO;
+import com.dh.apiDentalClinic.DTO.PageDTO;
 import com.dh.apiDentalClinic.entity.ClinicalRecord;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.Collection;
 import java.util.List;
 
 public interface IClinicalRecordService {
 
-    List<ClinicalRecordDTO> findClinicalRecordsByPatientId(Long patientId);
+    PageDTO<ClinicalRecordDTO> findClinicalRecordsByPatientId(Long patientId, int page, int size, Sort sort);
 
-    Collection<ClinicalRecordDTO> findAllClinicalRecord();
+    Collection<ClinicalRecordDTO> findAllClinicalRecord(Pageable pageable);
 
     ClinicalRecordDTO findClinicalRecordById(Long id);
 

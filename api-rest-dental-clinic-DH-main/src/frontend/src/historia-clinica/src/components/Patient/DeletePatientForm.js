@@ -1,4 +1,4 @@
-import './deleteMedicForm.css';
+import './deletePatientForm.css';
 import React,{ useState } from 'react';
 
 
@@ -18,6 +18,7 @@ const DeletePatientForm = ({ patient, onCancel, onConfirm }) => {
           }
           setDeleteMessage('Se eliminó correctamente');
            // Muestra el mensaje durante 2 segundos antes de llamar a onConfirm
+            window.location.reload();
           })
         .catch((error) => {
           console.error('Error al eliminar al paciente:', error);

@@ -1,6 +1,8 @@
 package com.dh.apiDentalClinic.controller;
 
 import com.dh.apiDentalClinic.DTO.MedicDTO;
+import com.dh.apiDentalClinic.DTO.PageDTO;
+import com.dh.apiDentalClinic.DTO.PatientDTO;
 import com.dh.apiDentalClinic.security.entity.Rol;
 import com.dh.apiDentalClinic.security.entity.User;
 import com.dh.apiDentalClinic.security.enums.NameRol;
@@ -33,6 +35,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static io.swagger.v3.oas.annotations.enums.ParameterIn.HEADER;
@@ -64,8 +67,13 @@ public class MedicController {
 
     @Operation(summary = "Find all medics")
     @GetMapping("/all")
-    public ResponseEntity<Collection<MedicDTO>> getAllMedic() {
-        return ResponseEntity.ok(iMedicService.findAllMedic());
+    public ResponseEntity<PageDTO<MedicDTO>> getAllMedics(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size) {
+
+        PageDTO<MedicDTO> medicsPage = iMedicService.findAllMedics(page, size);
+
+        return ResponseEntity.ok(medicsPage);
     }
 
     @Operation(summary = "Find medic by id",
@@ -153,5 +161,13 @@ public class MedicController {
         }
 
         return response;
+    }
+
+    @GetMapping("/search")
+    public List<MedicDTO> searchMedics(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String lastName,
+            @RequestParam(required = false) String registrationNumber) {
+        return iMedicService.searchMedics(name, lastName, registrationNumber);
     }
 }

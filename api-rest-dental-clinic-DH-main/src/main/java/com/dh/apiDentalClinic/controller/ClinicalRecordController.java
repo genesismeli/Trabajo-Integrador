@@ -1,20 +1,21 @@
 package com.dh.apiDentalClinic.controller;
 
 import com.dh.apiDentalClinic.DTO.*;
-import com.dh.apiDentalClinic.entity.ClinicalRecord;
 import com.dh.apiDentalClinic.service.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.List;
 
 import static io.swagger.v3.oas.annotations.enums.ParameterIn.HEADER;
 
@@ -47,10 +48,7 @@ public class ClinicalRecordController {
     }
 
 
-    @Operation(summary = "Add clinicalRecord",
-            parameters = @Parameter(name = "Authorization", in = HEADER, description = "Json web token required", required = true),
-            security = @SecurityRequirement(name = "jwtAuth"))
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+    @Operation(summary = "Add clinicalRecord")
     @PostMapping("/add")
     public ResponseEntity<ApiResponse<ClinicalRecordDTO>> addClinicalRecord(@RequestBody ClinicalRecordDTO clinicalRecordDTO) {
         iclinicalRecordService.saveClinicalRecord(clinicalRecordDTO);
@@ -61,15 +59,16 @@ public class ClinicalRecordController {
 
         @Operation(summary = "Find all clinicalRecord")
         @GetMapping("/all")
-        public ResponseEntity<Collection<ClinicalRecordDTO>> getAllClinicalRecord() {
-            return ResponseEntity.ok(iclinicalRecordService.findAllClinicalRecord());
+        public ResponseEntity<Collection<ClinicalRecordDTO>> getAllClinicalRecord(
+                @RequestParam(defaultValue = "0") int page,
+                @RequestParam(defaultValue = "10") int size
+        ) {
+            Pageable pageable = PageRequest.of(page, size);
+            return ResponseEntity.ok(iclinicalRecordService.findAllClinicalRecord(pageable));
         }
 
 
-        @Operation(summary = "Find clinical Record by id",
-                parameters = @Parameter(name = "Authorization", in = HEADER, description = "Json web token required", required = true),
-                security = @SecurityRequirement(name = "jwtAuth"))
-        @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+        @Operation(summary = "Find clinical Record by id")
         @GetMapping("/{id}")
         public ResponseEntity<?> getClinicalRecord(@PathVariable Long id) {
             ClinicalRecordDTO clinicalRecordDTO = iclinicalRecordService.findClinicalRecordById(id);
@@ -134,14 +133,20 @@ public class ClinicalRecordController {
         }
 
     @GetMapping("/patient/{patientId}")
-    public ResponseEntity<List<ClinicalRecordDTO>> getClinicalRecordsByPatientId(@PathVariable Long patientId) {
-        List<ClinicalRecordDTO> clinicalRecords = iclinicalRecordService.findClinicalRecordsByPatientId(patientId);
-        if (clinicalRecords.isEmpty()) {
+    public ResponseEntity<PageDTO<ClinicalRecordDTO>> getClinicalRecordsByPatientId(
+            @PathVariable Long patientId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "7") int size,
+            @RequestParam(defaultValue = "desc") String sortDirection)
+    {
+        Sort sort = Sort.by(sortDirection.equals("asc") ? Sort.Order.asc("date") : Sort.Order.desc("date"));
+
+        PageDTO<ClinicalRecordDTO> clinicalRecords = iclinicalRecordService.findClinicalRecordsByPatientId(patientId, page, size, sort);
+        if (clinicalRecords.getContent().isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(clinicalRecords);
     }
-
 
 }
 

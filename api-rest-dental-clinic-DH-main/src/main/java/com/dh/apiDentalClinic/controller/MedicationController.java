@@ -46,10 +46,7 @@ public class MedicationController {
         }
     }
 
-    @Operation(summary = "Add new medication",
-            parameters = @Parameter(name = "Authorization", in = HEADER, description = "Json web token required", required = true),
-            security = @SecurityRequirement(name = "jwtAuth"))
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+    @Operation(summary = "Add new medication")
     @PostMapping("/add")
     public ResponseEntity<ApiResponse<MedicationDTO>> addMedication(@RequestBody MedicationDTO medicationDTO) {
         medicationService.saveMedication(medicationDTO);

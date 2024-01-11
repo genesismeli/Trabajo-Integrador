@@ -1,10 +1,12 @@
 package com.dh.apiDentalClinic.service.impl;
 
 import com.dh.apiDentalClinic.DTO.DiagnosisDTO;
+import com.dh.apiDentalClinic.entity.ClinicalRecord;
 import com.dh.apiDentalClinic.entity.Diagnosis;
 import com.dh.apiDentalClinic.entity.Patient;
 import com.dh.apiDentalClinic.enums.DiagnosisStatus;
 import com.dh.apiDentalClinic.exception.ResourceNotFoundException;
+import com.dh.apiDentalClinic.repository.IClinicalRecordRepository;
 import com.dh.apiDentalClinic.repository.IDiagnosisRepository;
 import com.dh.apiDentalClinic.repository.IPatientRepository;
 import com.dh.apiDentalClinic.service.IDiagnosisService;
@@ -29,7 +31,15 @@ public class DiagnosisServiceImpl implements IDiagnosisService {
     private IPatientRepository patientRepository;
 
     @Autowired
+    private IClinicalRecordRepository clinicalRecordRepository;
+
+    @Autowired
     IPatientService ipatientService;
+
+    @Autowired
+    public DiagnosisServiceImpl(IDiagnosisRepository diagnosisRepository) {
+        this.diagnosisRepository = diagnosisRepository;
+    }
 
     @Autowired
     ObjectMapper mapper;
@@ -42,6 +52,11 @@ public class DiagnosisServiceImpl implements IDiagnosisService {
             throw new ResourceNotFoundException("Diagnosis", "id", "id not found: " + diagnosisDTO.getId());
         }
 
+    }
+
+    @Override
+    public List<Diagnosis> findByCodeOrDescription(String code, String description) {
+        return diagnosisRepository.findByCodeCie10CodeOrCodeCie10Description(code, description);
     }
 
     @Override
@@ -65,11 +80,11 @@ public class DiagnosisServiceImpl implements IDiagnosisService {
         }
         return diagnosisDTO;
     }
-
     @Override
     public void saveDiagnosis(DiagnosisDTO newDiagnosisDTO) {
        saveMethod(newDiagnosisDTO);
     }
+
 
 
 
@@ -93,11 +108,9 @@ public class DiagnosisServiceImpl implements IDiagnosisService {
 
         DiagnosisDTO diagnosisDTO = new DiagnosisDTO();
         diagnosisDTO.setId(diagnosis.getId());
-        diagnosisDTO.setCode(diagnosis.getCode());
-        diagnosisDTO.setDescription(diagnosis.getDescription());
-        diagnosisDTO.setStatus(diagnosis.getStatus());
-        diagnosisDTO.setDate(diagnosis.getDate());
-        diagnosisDTO.setNotes(diagnosis.getNotes());
+        diagnosisDTO.setCodeCie10(diagnosis.getCodeCie10());
+
+
 
 
 

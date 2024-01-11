@@ -1,14 +1,13 @@
 package com.dh.apiDentalClinic.enums;
 
 public enum DiagnosisStatus {
-    ACTIVE("active"),
-    RECOVERED("recovered"),
-    RECURRENCE("recurrence"),
-    RELAPSE("relapse"),
-    INACTIVE("inactive"),
-    REMISSION("remission"),
-    RESOLVED("resolved");
-
+    ACTIVO("Activo"),
+    RECUPERADO("Recuperado"),
+    RECURRENCIA("Recurrencia"),
+    RECAIDA("Recaída"),
+    INACTIVO("Inactivo"),
+    REMISION("Remisión"),
+    RESUELTO("Resuelto");
     private final String value;
 
     DiagnosisStatus(String value) {

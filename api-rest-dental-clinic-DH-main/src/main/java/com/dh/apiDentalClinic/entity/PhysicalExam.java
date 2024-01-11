@@ -18,8 +18,8 @@ import javax.validation.constraints.DecimalMin;
 @JsonIgnoreProperties(value={"hibernateLazyInitializer"})
 public class PhysicalExam {
     @Id
+    @Column(name = "physical_exam_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
     @Column(name = "heart_rate")
@@ -45,8 +45,9 @@ public class PhysicalExam {
     @DecimalMin(value = "0.0", message = "La glucosa no puede ser menor a 0")
     private Double glucose; // Glucosa
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "clinical_records_id")
     private ClinicalRecord clinicalRecord;
+
 
 }

@@ -1,6 +1,7 @@
 package com.dh.apiDentalClinic.controller;
 
 import com.dh.apiDentalClinic.DTO.DiagnosisDTO;
+import com.dh.apiDentalClinic.entity.Diagnosis;
 import com.dh.apiDentalClinic.service.IDiagnosisService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -13,6 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 
 import static io.swagger.v3.oas.annotations.enums.ParameterIn.HEADER;
 
@@ -47,16 +49,14 @@ public class DiagnosisController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    @Operation(summary = "Add new diagnosis",
-            parameters = @Parameter(name = "Authorization", in = HEADER, description = "Json web token required", required = true),
-            security = @SecurityRequirement(name = "jwtAuth"))
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+    @Operation(summary = "Add new diagnosis")
     @PostMapping("/add")
     public ResponseEntity<ApiResponse<DiagnosisDTO>> addDiagnosis(@RequestBody DiagnosisDTO diagnosisDTO) {
         diagnosisService.saveDiagnosis(diagnosisDTO);
         ApiResponse<DiagnosisDTO> response = new ApiResponse<>("Diagnosis created successfully!!", diagnosisDTO);
         return ResponseEntity.ok(response);
     }
+
     @Operation(summary = "Update an existing diagnosis",
             parameters = @Parameter(name = "Authorization", in = HEADER, description = "Json web token required", required = true),
             security = @SecurityRequirement(name = "jwtAuth"))
@@ -99,6 +99,16 @@ public class DiagnosisController {
         diagnosisService.deleteDiagnosis(id);
         return new ResponseEntity<>("Diagnosis deleted successfully.", HttpStatus.OK);
     }
+
+    @Operation(summary = "Busqueda diagnosis")
+    @GetMapping("/search")
+    public ResponseEntity<List<Diagnosis>> searchDiagnoses(
+            @RequestParam(required = false) String code,
+            @RequestParam(required = false) String description) {
+        List<Diagnosis> diagnoses = diagnosisService.findByCodeOrDescription(code, description);
+        return ResponseEntity.ok(diagnoses);
     }
+}
+
 
 

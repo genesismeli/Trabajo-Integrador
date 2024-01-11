@@ -1,6 +1,7 @@
 package com.dh.apiDentalClinic.service.impl;
 
 import com.dh.apiDentalClinic.DTO.MedicDTO;
+import com.dh.apiDentalClinic.DTO.PageDTO;
 import com.dh.apiDentalClinic.DTO.PatientDTO;
 
 import com.dh.apiDentalClinic.entity.Medic;
@@ -10,12 +11,15 @@ import com.dh.apiDentalClinic.repository.IPatientRepository;
 import com.dh.apiDentalClinic.service.IPatientService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class PatientServiceImpl implements IPatientService {
@@ -38,14 +42,20 @@ public class PatientServiceImpl implements IPatientService {
 
 
     @Override
-    public Collection<PatientDTO> findAllPatients() {
-        List<Patient> patients = patientRepository.findAll();
-        Set<PatientDTO> patientDTO = new HashSet<>();
-        for (Patient patient : patients) {
-            patientDTO.add(mapper.convertValue(patient, PatientDTO.class));
-        }
-        return patientDTO;
+    public PageDTO<PatientDTO> findAllPatients(int page, int size) {
+        Page<Patient> patientsPage = patientRepository.findAll(PageRequest.of(page, size));
 
+        List<PatientDTO> patientDTOs = patientsPage.getContent().stream()
+                .map(patient -> mapper.convertValue(patient, PatientDTO.class))
+                .collect(Collectors.toList());
+
+        return new PageDTO<>(
+                patientDTOs,
+                patientsPage.getTotalPages(),
+                patientsPage.getTotalElements(),
+                patientsPage.getNumber(),
+                patientsPage.getSize()
+        );
     }
 
     public Patient findById(Long id) {
@@ -93,9 +103,19 @@ public class PatientServiceImpl implements IPatientService {
         patientDTO.setPhone(patient.getPhone());
         patientDTO.setEmail(patient.getEmail());
 
-        // Mapea cualquier otro campo que pueda tener la entidad Patient a su DTO correspondiente
-
         return patientDTO;
+    }
+
+    @Override
+    public List<PatientDTO> searchPatients(String name, String lastName, String dni) {
+        List<Patient> patients = patientRepository.findByNameContainingOrLastNameContainingOrDniContaining(name, lastName, dni);
+
+        // Mapear la lista de entidades Patient a una lista de DTOs PatientDTO
+        List<PatientDTO> patientDTOs = patients.stream()
+                .map(this::convertEntityToDto)
+                .collect(Collectors.toList());
+
+        return patientDTOs;
     }
 
 }

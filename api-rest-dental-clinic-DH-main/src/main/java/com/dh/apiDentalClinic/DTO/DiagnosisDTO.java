@@ -1,5 +1,6 @@
 package com.dh.apiDentalClinic.DTO;
 
+import com.dh.apiDentalClinic.entity.CodeCie10;
 import com.dh.apiDentalClinic.entity.Patient;
 import com.dh.apiDentalClinic.enums.DiagnosisStatus;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -18,10 +19,10 @@ import java.util.Date;
 public class DiagnosisDTO {
 
     private Long id;
-    private String code;
-    private String description;
-    private DiagnosisStatus status;
-    private Date date;
+    //private String code;
+    //private String description;
+    private CodeCie10 codeCie10;
+    //private DiagnosisStatus status;
     private String notes;
 
 

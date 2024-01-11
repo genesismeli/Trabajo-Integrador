@@ -26,7 +26,7 @@ public class PhysicalExamDTO {
 
     private Double systolicPressure; // Presion Sistolica
 
-    private Double DiastolicPressure; // Presion Diastólica
+    private Double diastolicPressure; // Presion Diastólica
 
     private Integer beatsPerMinute; //Latidos por minuto
 

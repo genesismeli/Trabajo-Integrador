@@ -20,27 +20,26 @@ import java.util.Date;
 public class Diagnosis {
 
     @Id
-    @Column
+    @JoinColumn(name = "diagnosis_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "code")
-    private String code;
+    //@Column(name = "code")
+    //private String code;
 
-    @Column(name = "description")
-    private String description;
+    //@Column(name = "description")
+    //private String description;
 
-    @Convert(converter = DiagnosisStatusConverter.class)
-    @Column(name = "status")
-    private DiagnosisStatus status;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "code_cie10_id")
+    @JsonIgnoreProperties("hibernateLazyInitializer")
+    private CodeCie10 codeCie10;
 
-    @Column(name = "date")
-    private Date date;
+    //@Convert(converter = DiagnosisStatusConverter.class)
+    //@Column(name = "status")
+    //private DiagnosisStatus status;
 
-    @Column(name = "notes")
-    private String notes;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "clinical_records_id")
     private ClinicalRecord clinicalRecord;
 

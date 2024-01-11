@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './styles.css';
+import Message from '../Message.js';
 class Login extends Component {
   constructor() {
     super();
     this.state = {
       userName: '',
       password: '',
+      errorMessage: '',
 
 
     };
@@ -13,7 +15,7 @@ class Login extends Component {
 
   handleInputChange = (event) => {
     const { name, value } = event.target;
-    this.setState({ [name]: value });
+    this.setState({ [name]: value, errorMessage: '' });
   };
 
   handleLogin = (event) => {
@@ -51,6 +53,7 @@ class Login extends Component {
             })
             .catch((error) => {
               console.error('Error al iniciar sesión:', error);
+              this.setState({ errorMessage: 'Usuario o contraseña incorrectos' });
             });
       };
 
@@ -63,6 +66,9 @@ class Login extends Component {
      return (
         <div className="login-container">
           <h2 id="sesion">Iniciar Sesión</h2>
+        {this.state.errorMessage && (
+          <Message text={this.state.errorMessage} onClose={() => this.setState({ errorMessage: '' })} />
+        )}
           <form onSubmit={this.handleLogin}>
             <div className="form-group">
               <label htmlFor="username">Nombre de usuario:</label>
