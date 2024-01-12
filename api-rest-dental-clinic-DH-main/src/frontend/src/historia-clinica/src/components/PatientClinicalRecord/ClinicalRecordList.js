@@ -286,6 +286,9 @@ const downloadClinicalRecord = (recordId) => {
       {errorMessage && (
          <Message text={errorMessage} onClose={closeErrorMessage} />
       )}
+       {/* Verifica si hay fichas clínicas disponibles */}
+       {clinicalRecords.length > 0 ? (
+            <>
       <table>
         <thead>
           <tr>
@@ -331,6 +334,10 @@ const downloadClinicalRecord = (recordId) => {
         <img src={SigIcon} alt="Siguiente" width="20" height="20" />
         </button>
         </div>
+      </>
+        ) : (
+         <p className="error">No hay fichas clínicas disponibles.</p>
+        )}
       </div>
 
 

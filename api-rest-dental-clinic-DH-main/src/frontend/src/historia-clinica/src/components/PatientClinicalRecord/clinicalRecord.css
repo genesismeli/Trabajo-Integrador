@@ -156,7 +156,12 @@
   cursor: not-allowed; /* Cambia el cursor cuando está desactivado */
 }
 
-
+.error {
+  text-align: center;
+  font-size: 18px;
+  color: var(--color4);
+  margin: 20px;
+}
 
 /* Estilos para el botón "Ver Ficha" */
 .clinical-record-list-container button img {

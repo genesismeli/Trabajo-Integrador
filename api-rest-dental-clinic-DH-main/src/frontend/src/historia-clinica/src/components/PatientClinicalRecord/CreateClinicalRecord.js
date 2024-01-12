@@ -12,6 +12,8 @@ class CreateClinicalRecord extends Component {
         notes: '',
         anamnesis: '',
         reason: '',
+        pubMedSearchTerm: '',
+        anamnesisContent: '',
         codeCie10Options: [],
         vamedecumOptions: [],
         showPhysicalExams: false,
@@ -75,6 +77,30 @@ class CreateClinicalRecord extends Component {
         })
         .catch((error) => console.error('Error al obtener la información del paciente:', error));
   }
+
+ // Función para manejar cambios en la búsqueda de PubMed
+   handlePubMedSearchChange = (event) => {
+     const searchTerm = event.target.value;
+     // Puedes almacenar el término de búsqueda en el estado si es necesario
+     this.setState({ pubMedSearchTerm: searchTerm });
+   };
+
+   handleAnamnesisChange = (event) => {
+     const anamnesisContent = event.target.value;
+     // Almacena el contenido de la anamnesis en el estado o donde sea necesario
+     this.setState({ anamnesisContent });
+   };
+
+
+   // Función para realizar la búsqueda en PubMed
+   handlePubMedSearch = () => {
+     // Construye la URL de PubMed con el término de búsqueda
+     const pubMedSearchTerm = 'term=' + encodeURIComponent(this.state.pubMedSearchTerm);
+     const pubMedURL = `https://pubmed.ncbi.nlm.nih.gov/?${pubMedSearchTerm}`;
+
+     // Abre la vista de PubMed en un nuevo tab o ventana
+     window.open(pubMedURL, '_blank');
+   };
 
   handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -488,7 +514,28 @@ getVademecumObject = (id) => {
              <p> <strong>Email:</strong> {this.state.patient.email} </p>
              <p> <strong>DNI:</strong> {this.state.patient.dni} </p>
          </div>
-
+        {/* Sección para buscar en PubMed */}
+        <div className="pubmed-search-section">
+          <h3 className="form-section-title">Buscar en PubMed</h3>
+          <div className="form-section">
+            <label className="form-label">
+              Término de búsqueda:
+              <input
+                type="text"
+                name="pubMedSearchTerm"
+                value={this.state.pubMedSearchTerm}
+                onChange={this.handlePubMedSearchChange}
+                className="form-input"
+              />
+            </label>
+            <button
+              type="button"
+              onClick={this.handlePubMedSearch}
+              className="form-submit-button"
+            >
+              Iniciar búsqueda en PubMed
+            </button>
+          </div>
          <div className="right-container">
          <form className="clinical-record-form" onSubmit={this.handleCreateClinicalRecord}>
          <h2 className="form-title">Crear Nueva Ficha Clínica</h2>
@@ -558,7 +605,7 @@ getVademecumObject = (id) => {
              className="form-section-title"
              onClick={() => this.handleToggleFields('showPhysicalExams')}
            >
-             Exámenes Físicos
+             Signos Vitales
              {this.state.showPhysicalExams ? ' ▼' : ' ▶'}
            </h3>
            {this.state.showPhysicalExams && this.renderPhysicalExamsFields()}
@@ -602,6 +649,7 @@ getVademecumObject = (id) => {
            </button>
          </form>
          </div>
+       </div>
        </div>
      );
    }

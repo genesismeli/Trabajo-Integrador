@@ -223,10 +223,10 @@ class MedicList extends Component {
                   <td>{medic.speciality}</td>
                   <td>{medic.email}</td>
                   <td>
-                      <button onClick={() => this.handleEditMedicClick(medic)} title="Editar Paciente">
+                      <button onClick={() => this.openEditModal(medic)} title="Editar Paciente">
                           <img src={PencilIcon} alt="Editar" width="20" height="20" />
                       </button>
-                     <button onClick={() => this.handleDeleteMedicClick(medic)} title="Borrar Paciente">
+                     <button onClick={() => this.openDeleteModal(medic)} title="Borrar Paciente">
                         <img src={TrashIcon} alt="Eliminar" width="20" height="20" />
                      </button>
                   </td>

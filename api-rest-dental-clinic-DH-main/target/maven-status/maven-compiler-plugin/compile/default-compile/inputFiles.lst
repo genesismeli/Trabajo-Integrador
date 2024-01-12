@@ -4,7 +4,9 @@ C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-r
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\service\impl\MedicationServiceImpl.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\security\controller\ApiResponse.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\entity\Medic.java
+C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\controller\PdfMedicationsController.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\repository\IPhysicalExamRepository.java
+C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\exception\DuplicateDniException.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\security\jwt\JwtProvider.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\entity\Vademecum.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\DTO\ClinicalRecordDTO.java
@@ -27,14 +29,15 @@ C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-r
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\repository\IClinicalRecordRepository.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\controller\DiagnosisController.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\DTO\PatientDTO.java
-C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\OpenAI\OpenAIClientConfig.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\security\jwt\JwtEntryPoint.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\DTO\DiagnosisDTO.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\service\impl\PatientServiceImpl.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\security\controller\AuthController.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\security\enums\NameRol.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\service\IMedicationService.java
+C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\controller\ChatbotController.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\security\entity\PrincipalUser.java
+C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\controller\PdfExamController.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\service\impl\VademecumServiceImpl.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\service\IPhysicalExamService.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\entity\Medication.java
@@ -43,14 +46,17 @@ C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-r
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\controller\MedicController.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\entity\CodeCie10.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\service\IVademecumService.java
+C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\controller\PdfDiagnosisController.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\service\IMedicService.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\security\entity\User.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\controller\CodeCie10Controller.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\converters\DiagnosisStatusConverter.java
+C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\controller\JwtController.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\service\impl\DiagnosisServiceImpl.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\ApiDentalClinicApplication.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\entity\ClinicalRecord.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\DTO\PageDTO.java
+C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\security\jwt\TokenExpiredException.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\controller\ApiResponse.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\entity\Diagnosis.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\security\service\UserService.java
@@ -70,7 +76,6 @@ C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-r
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\repository\ICodeCie10Repository.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\security\jwt\JwtTokenFilter.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\security\entity\DTO\RegisterDTO.java
-C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\OpenAI\OpenAIClientService.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\security\repository\RolRepository.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\controller\VamedecumController.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\service\impl\MedicServiceImpl.java
@@ -81,4 +86,3 @@ C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-r
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\security\MainSecurity.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\security\entity\DTO\JwtDTO.java
 C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\config\SwagguerConfig.java
-C:\Users\genes\Downloads\api-rest-dental-clinic-DH-main\Trabajo-Integrador\api-rest-dental-clinic-DH-main\src\main\java\com\dh\apiDentalClinic\OpenAI\OpenAIClientController.java

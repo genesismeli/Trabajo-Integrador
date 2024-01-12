@@ -121,9 +121,9 @@ public class PatientController {
 
     @GetMapping("/search")
     public List<PatientDTO> searchPatients(
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String lastName,
-            @RequestParam(required = false) String dni) {
+           @RequestParam(required = false) String name,
+           @RequestParam(required = false) String lastName,
+           @RequestParam(required = false) String dni) {
         return ipatientService.searchPatients(name, lastName, dni);
     }
 

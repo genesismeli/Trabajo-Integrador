@@ -93,7 +93,7 @@ class EditMedicForm extends Component {
 
     return (
       <div className="edit-medic-form-container">
-        <h2>Editar Médico</h2>
+        <h2 id="sesion">Editar Médico</h2>
         <form onSubmit={this.handleUpdateMedic}>
           <div>
             <label htmlFor="name">Nombre:</label>
